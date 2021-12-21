@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WELCOME</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'head.css')}}" type="text/css">
+</head>
+<style>
+    /* body {
+        height: 5000px;
+        
+    } */
+
+    .login {    /* 绿框 */
+        margin: auto;
+        margin-top: 150px;
+        width: 60%;
+        border: 3px solid #73AD21;
+        padding: 20px 15px;
+        /* display:flex;
+        justify-content:center; 
+        align-items:center;  */
+        display: block;
+
+        
+    }
+
+    .loginBox { /* 绿框内 */
+        width: 95%;
+        /* padding: 10% 0;
+        align-items: center; */
+        /* margin: auto; */
+        text-align: center;
+
+    }
+
+    input { /* 输入框 */
+        width: 300px;
+        padding: 10px;
+        border: 1px solid blue;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    button {    /* 下方按钮 */
+        background-color: cornflowerblue;
+        border: none;
+        text-align: center;
+        color: white;
+        font-size: 16px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        /* display: block;
+        margin-left: auto;
+        margin-right: auto; */
+    }
+
+    .log {  /* 登录 */
+        margin: 0 10px 0 0;
+    }
+    .reg {  /* 注册 */
+        margin:  0 0 0 10px;
+    }
+
+</style>
+
+<body>
+    <!-- 导航栏 -->
+    <div class="head">Welcome</div>
+
+    <!-- 登录框 -->
+    <div class="login">
+        <div class="loginBox">
+            
+            <h3>- Welcome Back -</h3><br>
+               
+            <form action="" method="post">
+                <!-- 输入框 -->
+                <div class="input">
+                    <input type="text" placeholder="Please Enter Your User ID" name="uid" id="uid">
+                </div> 
+                <br>
+
+                <div class="input">
+                    <input type="password" placeholder="Please Enter Your Password" name="upsw" id="upsw">
+                </div>
+                <br><br>
+
+                <!-- 按钮 -->
+                <span>
+                    <button type = "submit" id ="log">   
+                        LOG IN
+                    </button>
+                </span> 
+                
+                <span>
+                    <button id="reg">
+                        REGISTER
+                    </button>
+                </span>
+                <br>
+                <br>
+                <div>
+                    <button id="visitor">
+                        Visitor Mode
+                    </button>
+                </div>
+                <br>
+                <div>
+                    <button id="forgetPSW">
+                        Forget Password
+                    </button>
+                </div>
+            </form> <!-- 输入框和按钮结束 -->
+        </div>
+
+    </div>  <!-- 登录框布局结束 -->
+
+    <!-- 登录框脚本 -->
+            <script>
+                var loginBtn = document.getElementById('log');
+                var uidInput = document.querySelector('#uid');
+                var uid = uidInput.value
+                
+                // var url = './main.html?uid=' + uid
+
+                loginBtn.onmouseover = function() {
+                    this.style.cursor ='pointer';
+                }
+                loginBtn.onclick = function() {
+                    
+                    //alert(uid)
+                    {#window.open('./main.html');#}
+                    {#window.close();#}
+                //    location.assign ('./main.html')
+            }
+            </script>
+
+
+
+</body>
+</html>
