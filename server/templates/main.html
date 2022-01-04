@@ -7,9 +7,206 @@
     <link rel="stylesheet" href="{{url_for('static', filename = 'head.css')}}" type="text/css">
     <title>WELCOME</title>
 </head>
+
+<style>
+    input {
+        width: 300px;
+        /* padding: 10px; */
+    }
+</style>
+
 <body>
     <!-- 导航栏 -->
-    <div class="head">Welcome, {{ user.uid }}</div>
-    <p style="margin-top: 150px">This is the main page</p>
+    <!-- navi -->
+    <div class="head" >Welcome, {{ user.uid }}</div>
+    <!-- <p style="margin-top: 150px">This is the main page</p> -->
+
+    <!-- In this part we introduce and test XSS -->
+    <h2 style="margin-top: 150px">Cross-Site Scripting (XSS)</h2>
+    <hr>
+
+    <!-- introduction -->
+    Cross-Site Scripting (XSS) is a security vulnerability that belongs to 
+    Injection. The attacker can inject malicious scripts or codes to the 
+    website and execute them. By this means, the attacker can obtain some 
+    sensitive data such as user's input and cookies, thereby endangering data security. <br>
+
+    <br>
+    There're 3 types of XSS, which are reflected, stored and DOM-Based XSS. <br>
+
+    <!-- In this part we introduce and test 3 types of XSS -->
+    <br>
+    <ul>
+        <li>
+            <h3>Reflected XSS</h3>
+            The attacker can craft a special URL which looks innocent and trusted 
+            but contains malicious codes. These URLs can be sent to the user via 
+            email, SMS and even pop-up ads. When the user opens the URL, the server 
+            takes the malicious part and sends it back to the browser to execute, 
+            and then the attack starts. <br>
+
+            <br>
+            This attack can also happen when we enter some abnormal strings to the 
+            input box. A classic example for it is the search engine.   <br>
+
+            <!-- In this part we test some XSS examples -->
+            <br>
+            <h4>Exploit Examples</h4>
+            <hr>
+            
+            <!-- Input test-->
+            The input box below is to collect what you entered. It has no filter at all
+            and is easy to be attacked.<br>
+
+            <br>
+            <form action="" method="post">
+                <input type="text" name = "input" id="input" placeholder="Input something here" value="">
+                <button type="submit" id="sub" class="buttons">Submit</button>
+                <button type="button" id="reflected" class="buttons">Test Reflected XSS</button>
+            </form>
+            <br>
+
+            <!-- Script for the form above -->
+            <script>
+                var directSubmit = document.getElementById('sub');
+                var reflectTest = document.getElementById('reflected');
+                // var storeTest = document.getElementById('stored');
+
+                var buttons = document.getElementsByClassName('buttons');
+
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].onmouseover = function(){
+                        this.style.cursor = 'pointer';
+                    }
+                }
+
+                reflectTest.onclick = function(){
+                    var input = document.getElementById('input');
+                    input.setAttribute("value", "<script>alert('XSS Warning');<\/script>");
+                    //input.value = "<script>alert('XSS Warning');<\/script>";
+                }
+            </script>
+
+            The link below can also cause Reflected XSS, as we mentioned above. <br>
+
+            <a href="javascript:alert(&#x27;XSS&#x27;)">test</a>
+        </li>
+
+        <!-- In this part we talk about stored XSS -->
+        <li>
+            <h3>Stored XSS</h3>
+            <hr>
+
+            Similar to the reflected one, the attacker can submit some malicious code or 
+            script to the website. However, this time the malicious content will be stored 
+            to the database and every time we open the website, the attack will be executed.    <br>
+
+            <br>
+            <h4>Exploit Examples</h4>
+            <hr>
+
+            The box below can store the input information to the database.  <br>
+
+            <br>
+            <form action="" method="post">
+                <input type="text" name = "storedInput" id="storedInput" placeholder="Input something here to store" value="">
+                <button type="submit" id="storedSub" class="buttons">Submit</button>
+                <button type="button" id="stored" class="buttons">Test Stored XSS</button>
+            </form>
+            <br>
+
+            <script>
+                var input = document.getElementById('storedInput');
+
+                var info = input.getAttribute("value");
+
+                // working in progress..
+            </script>
+        </li>
+
+        <li>
+            <h3>Solutions</h3>
+            <hr>
+
+            Since both reflected and stored XSS are executed when the server takes the 
+            malicious code and inject it to HTML, we can prevent it from following aspects: nr
+
+            <ul>
+                <li>
+                    <h4>Escape HTML</h4>
+                    We can use library to escape some sensitive characters such as &, &lt; and &gt;. 
+                </li>
+                <li>
+                    <h4>Content Security Policy</h4>
+                    We can set strict policy to avoid XSS, which can include:
+                    <ul>
+                        <li>
+                            No loading foreign codes, in order to avoid complex attacks.
+                        </li>
+                        <li>
+                            No submitting data in foreign domain, thus the data won't be leaked.
+                        </li>
+                        <li>
+                            Ban unauthorized scripts.
+                        </li>
+                        <li>
+                            Collect reports from the users to find more flaws.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h4>Filter the Input</h4>
+                    In most conditions, since we don't know what the input is and how the input value 
+                    is processed, we cannot set a common rule for filtering. However, for some conditions 
+                    like inputting the phone number and email address, it's quite useful to filter the input 
+                    by limiting the length or setting some invalid characters.
+                </li>
+                <li>
+                    <h4>HTTP-only Cookie</h4>
+                    This allows a web server to set a cookie that is unavailable to client-side scripts.
+                </li>
+                <li>
+                    <h4>Verification Code</h4>
+                    This can avoid some scripts pretend to be the user to carry on some dangerous operations.
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+
+    <hr>
+    <!-- In this part we talk about SSTI -->
+    <h2>Server-Side Template Injection (SSTI)</h2>
+    <hr>
+    
+
+    <br>
+    (working in progress...)    <br>
+
+    <br>
+    <h3>Exploit Examples</h3>
+    <hr>
+
+    We can use the links below to test SSTI.   <br>
+    
+    <br>
+    http://127.0.0.1:5001/mainPage/sstiTest <br>
+ 
+
+    <!-- <form action="" method="get">
+        <input type="text" name = "sstiTest" id="sstiInput" placeholder="Input something here" value="">
+        <button type="submit" id="sstiSub" class="buttons">Submit</button>
+    </form>
+    <br>
+
+    <script>
+        var input = document.getElementById('sstiInput');
+
+        var info = input.getAttribute("value");
+
+        // working in progress..
+    </script> -->
+
+
 </body>
 </html>

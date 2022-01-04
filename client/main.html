@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,5 +8,76 @@
 </head>
 <body>
     <h1>This is the main page</h1>
+
+    Test for XSS:
+    <br>
+
+    <input type="text" placeholder="Input something to store">
+    <br>
+
+    <button type="submit" id="sub" class="buttons">submit directly</button>
+    <button type="submit" id="reflected" class="buttons">test reflected xss</button>
+    <button type="submit" id="stored" class="buttons">test stored xss</button>
+
+    <script>
+        var directSubmit = document.getElementById('sub');
+        var reflectTest = document.getElementById('reflected');
+        var storeTest = document.getElementById('stored');
+
+        var buttons = document.getElementsByClassName('buttons');
+       
+
+    </script> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'head.css')}}" type="text/css">
+    <title>WELCOME</title>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <div class="head">Welcome, {{ user.uid }}</div>
+    <p style="margin-top: 150px">This is the main page</p>
+
+    Test for XSS:
+    <br>
+
+    <form action="" method="post">
+    <input type="text" name = "input" placeholder="Input something here" value="">
+    <button type="submit" id="sub" class="buttons">submit</button>
+    <br>
+
+    <button type="button" id="reflected" class="buttons">test reflected xss</button>
+    <button type="button" id="stored" class="buttons">test stored xss</button>
+    </form>
+    <br>
+
+    Input the text below to test xss:   <br>
+    &lt;script&gt;alert('XSS Warning');&lt;/script&gt;
+
+
+    <script>
+       var directSubmit = document.getElementById('sub');
+       var reflectTest = document.getElementById('reflected');
+       var storeTest = document.getElementById('stored');
+
+        var buttons = document.getElementsByClassName('buttons');
+
+        buttons.onmouseover = function (){
+            this.style.cursor = 'pointer';
+        }
+
+        reflectTest.onclick = function (){
+            var input = document.getElementsByName('input');
+            input.value = "123";
+        }
+    </script> 
+</body>
+</html>
 </body>
 </html>
