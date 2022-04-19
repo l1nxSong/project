@@ -10,9 +10,23 @@
 
 <style>
     input {
-        width: 300px;
+        width: 500px;
         /* padding: 10px; */
     }
+
+    .vul_name {
+        text-align: left;
+    }
+    .show_hide {
+        float: right;
+        /*text-align: right;*/
+        font-size: medium;
+    }
+
+    .fold {
+        display: none;
+    }
+
 </style>
 
 <body>
@@ -21,10 +35,24 @@
     <div class="head" >Welcome, {{ user.uid }}</div>
     <!-- <p style="margin-top: 150px">This is the main page</p> -->
 
+<!--    Introduction to this page-->
+    <h1 style="margin-top: 100px">User's Guide</h1>
+    <p>
+        This page includes all the vulnerabilities supported by the
+        application, not only can you find the introduction and solutions
+        for each of them, but also you can try it yourself to see how it works.
+    </p>
+    <p>
+        Every user can have access to this page, including the visitors.
+    </p>
     <!-- In this part we introduce and test XSS -->
-    <h2 style="margin-top: 150px">Cross-Site Scripting (XSS)</h2>
+    <h2 class="vul_head">
+        <span class="vul_name">Cross-Site Scripting (XSS)</span>
+        <span class="show_hide">SHOW ▼</span>
+    </h2>
     <hr>
 
+    <div class="content_text fold">
     <!-- introduction -->
     Cross-Site Scripting (XSS) is a security vulnerability that belongs to 
     Injection. The attacker can inject malicious scripts or codes to the 
@@ -32,14 +60,20 @@
     sensitive data such as user's input and cookies, thereby endangering data security. <br>
 
     <br>
-    There're 3 types of XSS, which are reflected, stored and DOM-Based XSS. <br>
+    There are 3 types of XSS, which are reflected, stored and DOM-Based XSS. <br>
 
     <!-- In this part we introduce and test 3 types of XSS -->
     <br>
     <ul>
         <li>
-            <h3>Reflected XSS</h3>
-            The attacker can craft a special URL which looks innocent and trusted 
+            <h3>
+                <span class="vul_name">Reflected XSS</span>
+                <span class="show_hide">SHOW ▼</span>
+            </h3>
+
+            <div class="content_text fold">
+<!--            introduction to Reflected XSS-->
+            The attacker can craft a special URL which looks innocent and trusted
             but contains malicious codes. These URLs can be sent to the user via 
             email, SMS and even pop-up ads. When the user opens the URL, the server 
             takes the malicious part and sends it back to the browser to execute, 
@@ -90,13 +124,19 @@
             The link below can also cause Reflected XSS, as we mentioned above. <br>
 
             <a href="javascript:alert(&#x27;XSS&#x27;)">test</a>
+<!--                END of Reflected XSS-->
+            </div>
         </li>
 
         <!-- In this part we talk about stored XSS -->
         <li>
-            <h3>Stored XSS</h3>
+            <h3>
+                <span class="vul_name">Stored XSS</span>
+                <span class="show_hide">SHOW ▼</span></h3>
             <hr>
 
+            <div class="content_text fold">
+<!--                introduction to Stored XSS-->
             Similar to the reflected one, the attacker can submit some malicious code or 
             script to the website. However, this time the malicious content will be stored 
             to the database and every time we open the website, the attack will be executed.    <br>
@@ -122,12 +162,18 @@
 
                 // working in progress..
             </script>
+<!--                END of Stored XSS-->
+            </div>
         </li>
 
         <li>
-            <h3>Solutions</h3>
+            <h3>
+                <span class="vul_name">Solutions</span>
+                <span class="show_hide">SHOW ▼</span></h3>
+            </h3>
             <hr>
 
+            <div class="content_text fold">
             Since both reflected and stored XSS are executed when the server takes the 
             malicious code and inject it to HTML, we can prevent it from following aspects: nr
 
@@ -170,43 +216,130 @@
                     This can avoid some scripts pretend to be the user to carry on some dangerous operations.
                 </li>
             </ul>
-
+<!--                END of XSS Solutions-->
+            </div>
         </li>
     </ul>
-
     <hr>
+<!--        END of XSS Section-->
+    </div>
+
     <!-- In this part we talk about SSTI -->
-    <h2>Server-Side Template Injection (SSTI)</h2>
+    <h2>
+        <span class="vul_name">Server-Side Template Injection (SSTI)</span>
+        <span class="show_hide">SHOW ▼</span>
+    </h2>
     <hr>
-    
+    <div class="content_text fold">
+<!--    introduction to SSTI-->
+    Jinja2 is a template engine that is widely used in Python Flask. 
+    It uses double curly brackets to wrap the parameter. 
+    Python Flask also offers a function called render_template_string() 
+    that allows us to write HTML codes directly in a string 
+    instead of a HTML file. As a result, if we want to pass a 
+    parameter in form of %s, the attacker can input some malicious 
+    commands to manipulate the templates which is fatal to the server 
+    and even the whole application.    <br>
 
     <br>
-    (working in progress...)    <br>
+    <ul>
+        <li>
+            <h3>Exploit Examples</h3>
+            <hr>
+        
+            We can use the links below to test SSTI.   <br>
+            
+            <br>
+            http://127.0.0.1:5001/mainPage/sstiTest <br>
+            <!-- http://127.0.0.1:5001/mainPage/sstiTest?name={{12345}} -->
+         
+        
+            <br>
+            <form action="" method="post">
+                <input type="text" name = "sstiTest" id="sstiInput" placeholder="Input something here" value="">
+                <br>
+                <button type="button" id="sstiPsw" class="buttons">Password?</button>
+                <button type="button" id="sstiConfig" class="buttons">Config?</button>
+                <button type="button" id="sstiRead" class="buttons">Read a File</button>
+                <button type="button" id="sstiWrite" class="buttons">Write a File</button>
+            </form>
+            <br>
+        
+            <script>
+                
+                var password = document.getElementById('sstiPsw');
+                var config = document.getElementById('sstiConfig');
+                var read = document.getElementById('sstiRead');
+                var write = document.getElementById('sstiWrite');
+        
+                var input = document.getElementById('sstiInput');
+        
+                password.onclick = function() {
+                    
+                    input.setAttribute("value", "http://127.0.0.1:5001/mainPage/sstiTest?name=\{\{person.password\}\}")
+                }
+        
+                config.onclick = function() {
+                    
+                    input.setAttribute("value", "http://127.0.0.1:5001/mainPage/sstiTest?name=\{\{config\}\}")
+                }
+        
+                read.onclick = function() {
+                    
+                    input.setAttribute("value", "http://127.0.0.1:5001/mainPage/sstiTest?name=\{\{().__class__.__bases__[0].__subclasses__()[75].__init__.__globals__.__builtins__[%27open%27](%27\/etc\/passwd%27).read()\}\}")
+                }
+            </script>        
+        </li>
 
-    <br>
-    <h3>Exploit Examples</h3>
-    <hr>
+        <li>
+            <h3>Solutions</h3>
+            <hr>
 
-    We can use the links below to test SSTI.   <br>
-    
-    <br>
-    http://127.0.0.1:5001/mainPage/sstiTest <br>
- 
+            Since this is mainly caused by the %s parameters 
+            passed by render_template_string(), we can first change them 
+            to render_template(), which is much safer than the previous one. 
+            If it's impossible to change, all the %s parameters should be 
+            forbidden from passing.
+        </li>
+    </ul>
+<!--        END of SSTI Section-->
+    </div>
 
-    <!-- <form action="" method="get">
-        <input type="text" name = "sstiTest" id="sstiInput" placeholder="Input something here" value="">
-        <button type="submit" id="sstiSub" class="buttons">Submit</button>
-    </form>
-    <br>
-
+<!--    Below is the script to control the show & hide of contents-->
     <script>
-        var input = document.getElementById('sstiInput');
+        var show_hide = document.getElementsByClassName('show_hide');
+        var contents = document.getElementsByClassName('content_text');
+        // var show_hide = document.getElementsByClassName('show_content');
 
-        var info = input.getAttribute("value");
+        for (var i = 0; i < show_hide.length; i++) {
+            // set index for the show_hide icons
+            show_hide[i].setAttribute('index', i.toString());
 
-        // working in progress..
-    </script> -->
+            show_hide[i].onmouseover = function() {
+                this.style.cursor = 'pointer';
+            }
+            show_hide[i].onclick = function() {
+                var j = this.getAttribute('index');
+                // if this item is not folded, then we can add it to
+                // the class "fold" to make it "invisible", i.e. folded
+                // indexOf(): returns -1 when not found, the real index when found
+                if (contents[j].className.indexOf('fold') == -1) {
+                    // not found, content is visible and not folded
+                    // add it to the class to make it invisible
+                    contents[j].classList.add('fold');
+                    this.innerHTML = 'SHOW ▼'
+                }
 
+                else {
+                    // found, content is folded and invisible
+                    // move it out of the class to make it visible
+                    contents[j].classList.remove('fold');
+                    this.innerHTML = 'HIDE ▲'
+                }
+
+            }
+        }
+    </script>
 
 </body>
 </html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    *{
+        margin: 0px;
+    }
+    #nav{
+        border: coral 1px solid;
+        width: 400px;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+    #nav p{
+        padding: 10px;
+        background-color: #FF7F50;
+        color: white;
+        font-weight: 900;
+        /* letter-spacing: 10px; */	
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+    #nav div{
+        font-size: 15px;
+    }
+    .z{
+        margin-left: 10px;
+        font-weight: 800;
+        
+    }
+    .y{
+        color: #FF7F50;
+        font-weight: 800;
+        margin-left: 150px;
+        cursor: pointer;
+    }
+    .s{
+        border-bottom: #FF7F50 1px solid;
+        margin-top: 10px;
+    }
+    .s ol{
+        margin: 9px 0px;
+    }
+    .s li{
+        padding: 2px 0px;
+    }
+    .s a,.s a:visited{
+        color: black;
+        text-decoration: none;
+    }
+    .s li:hover,.s a:hover{
+        color: #ff4500;
+        font-weight: 800;
+    }
+    .play{
+        display: none;
+    }
+</style>
+<body>
+    <div id="nav">
+    <p>笔记本排行榜</p>
+    <div class="s">
+        <span class="z">关注最高</span>
+        <span class="y">收起</span>
+        <ol name='c'>
+            <li><a href="#">热门笔记本电脑排名</a></li>
+            <li><a href="#">笔记本电脑品牌排名</a></li>
+            <li><a href="#">热门笔记本电脑系列排名</a></li>
+            <li><a href="#">上升最快笔记本电脑排名</a></li>
+        </ol>
+    </div>
+    <div class="s">
+         <span class="z">热门品牌</span>
+         <span class="y">收起</span>
+         <ol name='c'>
+             <li><a href="#">联想笔记本电脑排名</a></li>
+             <li><a href="#">华硕笔记本电脑排名</a></li>
+             <li><a href="#">戴尔笔记本电脑排名</a></li>
+        </ol>
+    </div>
+    </div>
+    <script type="text/javascript">
+        var d=document.getElementsByClassName('y');
+        var n=document.getElementsByName('c');		
+        for(var i=0;i<d.length;i++){
+            d[i].setAttribute('index',i);
+            d[i].onclick=function(){
+                var id=this.getAttribute('index');									
+                if(n[id].className.indexOf('play')<0){
+                    n[id].classList.add('play');
+                    this.innerHTML='展开'
+                    console.log(n[id])
+                }
+                else{
+                  n[id].classList.remove("play");
+                  this.innerHTML='收起'
+                  console.log(n[id])
+                }
+            }
+        }
+    </script>
+</body>
+</html>

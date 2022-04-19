@@ -1,0 +1,56 @@
+{
+    "device":[
+        {
+            "name": "router_01",
+            "category": "router",
+            "model": "TP-LINK",
+            "position": "dining_hall",
+            "net": ["wifi_01"]
+        },
+        {
+            "name": "temperature_monitor_01",
+            "category": "sensor",
+            "model": "dht11",
+            "position": "bedroom",
+            "net": ["blue_01", "wifi_01"]
+        },
+        {
+            "name": "temperature_monitor_02",
+            "category": "sensor",
+            "model": "dht11",
+            "position": "living_room",
+            "net": ["wifi_01"]
+        },
+        {
+            "name": "AC_01",
+            "category": "air_conditioner",
+            "model": "GREE",
+            "position": "bedroom",
+            "net": ["blue_01", "wifi_01"]
+        },
+        {
+            "name": "AC_02",
+            "category": "air_conditioner",
+            "model": "GREE",
+            "position": "living_room",
+            "net": ["wifi_01"]
+        },
+        {
+            "name": "computer",
+            "category": "server",
+            "model": "DELL",
+            "position": "bedroom",
+            "net": ["blue_01", "wifi_01"]
+        }
+    ],
+    "network":[
+        {
+            "name": "wifi_01",
+            "category": "wifi"
+        },
+        {
+            "name": "blue_01",
+            "category": "bluetooth"
+        }
+    ]
+}

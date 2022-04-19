@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+<h2>Devices in the House</h2>
+<hr>
+<table border="5"  width = "600" height = "200">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Name</th>
+            <th>Model</th>
+            <th>Position</th>
+
+        </tr>
+     </thead>
+
+     <tbody>
+         <tr>
+             <td>Router</td>
+             <td>
+                 <a href="http://127.0.0.1:5001/dev/router1">router_01</a>
+             </td>
+             <td>TP-LINK</td>
+             <td>dining_hall</td>
+         </tr>
+         <tr>
+             <td rowspan="2">Sensor</td>
+             <td>temperature_monitor_01</td>
+             <td>dht11</td>
+             <td>bedroom</td>
+         </tr>
+         <tr>
+             <td>temperature_monitor_02</td>
+             <td>dht11</td>
+             <td>living_room</td>
+         </tr>
+         <tr>
+            <td rowspan="2">Air Conditioner</td>
+            <td>AC_01</td>
+            <td>GREE</td>
+            <td>bedroom</td>
+        </tr>
+        <tr>
+            <td>AC_02</td>
+            <td>GREE</td>
+            <td>living_room</td>
+        </tr>
+     </tbody>
+</table>
+<br>
+
+<!-- “temperature_monitor_01” is allowed to transfer data to “AC_01” via “blue_01”; <br>
+
+“temperature_monitor_02” is allowed to transfer data to “AC_02” via “wifi_01”; <br>
+
+“AC_02” is allowed to log in “router_01”; <br>
+
+“router_01” is allowed to request actions on “sensor”. <br> -->
+
+</body>
+</html>

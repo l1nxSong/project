@@ -6,6 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WELCOME</title>
     <link rel="stylesheet" href="{{url_for('static', filename = 'head.css')}}" type="text/css">
+    <script>
+        function showNavigationDetails() {
+            let t = window.performance.timing
+            let t1 = t.loadEventStart - t.fetchStart
+            let t2 = t.responseEnd - t.responseStart
+            document.getElementById("invocation").innerHTML = t1.toString();
+            document.getElementById("response").innerHTML = t2.toString();
+
+            // let tt = window.PerformanceNavigationTiming
+            // let tt1 = tt.loadEventStart
+        }
+
+        // window.addEventListener('load', checkTime, false);
+    </script>
+
+<!--    <script>-->
+<!--        $(document).ready(function () {-->
+<!--            $("#log").click(function() {-->
+<!--                if ( == "wrong") {}-->
+<!--                alert("Wrong Password!");-->
+<!--            })-->
+<!--        })-->
+<!--    </script>-->
+<!--    <script>-->
+<!--        function showNavigationDetails() {-->
+<!--            // Get the first entry-->
+<!--            const [entry] = performance.getEntriesByType("navigation");-->
+<!--            // Show it in a nice table in the developer console-->
+<!--            console.table(entry.toJSON());-->
+<!--            // document.getElementById("timeLog").innerHTML = entry.toJSON();-->
+<!--            let entry_json = entry.toJSON();-->
+<!--            let responseStart = entry_json.-->
+
+<!--        }-->
+<!--    </script>-->
 </head>
 <style>
     /* body {
@@ -65,82 +100,92 @@
     .reg {  /* 注册 */
         margin:  0 0 0 10px;
     }
+    #check {
+        color: red;
+    }
 
 </style>
 
-<body>
+<body onload="showNavigationDetails()">
     <!-- 导航栏 -->
     <div class="head">Welcome</div>
 
-    <!-- 登录框 -->
+    <!-- START of the whole log in box (the green box) -->
     <div class="login">
+        <!-- START of the elements inside the box -->
         <div class="loginBox">
             
             <h3>- Welcome Back -</h3><br>
-               
+            <!-- These 2 elements below show some performance data -->
+            <div id="invocation" name="invocation"></div>
+            <div id="response" name="response"></div>
+            <!-- START of the input boxes and buttons-->
             <form action="" method="post">
-                <!-- 输入框 -->
+                <!-- user id -->
                 <div class="input">
                     <input type="text" placeholder="Please Enter Your User ID" name="uid" id="uid">
                 </div> 
                 <br>
-
+                <!-- password -->
                 <div class="input">
                     <input type="password" placeholder="Please Enter Your Password" name="upsw" id="upsw">
                 </div>
-                <br><br>
+                <br>
 
-                <!-- 按钮 -->
+                <!-- show messages if the input is invalid -->
+                <div id="check">{{get_flashed_messages()[0]}}</div>
+                <br>
+
+                <!-- buttons -->
                 <span>
-                    <button type = "submit" id ="log">   
+                    <button type="submit" id ="log" class="buttons">
                         LOG IN
                     </button>
                 </span> 
                 
                 <span>
-                    <button id="reg">
+                    <button id="reg" class="buttons" formaction="/register">
                         REGISTER
                     </button>
                 </span>
-                <br>
-                <br>
+                <br>    <br>
+                <!-- Visitor Mode -->
                 <div>
-                    <button id="visitor">
+                    Tip: You can use the button below to log in
+                    with the visitor account if you are new here.<br>
+                    <br>
+                    <button id="visitor" class="buttons">
                         Visitor Mode
                     </button>
                 </div>
-                <br>
-                <div>
-                    <button id="forgetPSW">
-                        Forget Password
-                    </button>
-                </div>
-            </form> <!-- 输入框和按钮结束 -->
+            <!-- END of the input boxes and buttons -->
+            </form>
+        <!-- END of the elements inside the log in box -->
         </div>
+    <!-- END of the whole log in box (the whole green box) -->
+    </div>
 
-    </div>  <!-- 登录框布局结束 -->
-
-    <!-- 登录框脚本 -->
+            <!-- This script controls the elements inside the green box -->
             <script>
-                var loginBtn = document.getElementById('log');
-                var uidInput = document.querySelector('#uid');
-                var uid = uidInput.value
-                
-                // var url = './main.html?uid=' + uid
-
-                loginBtn.onmouseover = function() {
-                    this.style.cursor ='pointer';
+                // set all the buttons
+                var buttons = document.getElementsByClassName('buttons');
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].onmouseover = function(){
+                        this.style.cursor = 'pointer';
+                    }
                 }
-                loginBtn.onclick = function() {
-                    
-                    //alert(uid)
-                    {#window.open('./main.html');#}
-                    {#window.close();#}
-                //    location.assign ('./main.html')
-            }
+                // visitor mode
+                var visitor = document.getElementById('visitor');
+                visitor.onclick = function() {
+                    // set the visitor account
+                    var id_box = document.getElementById('uid');
+                    var psw_box = document.getElementById('upsw');
+
+                    id_box.setAttribute('value', 'visitor');
+                    psw_box.setAttribute('value', '12345');
+                }
+            //    END of the script
             </script>
-
-
 
 </body>
 </html>
