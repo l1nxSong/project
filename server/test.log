@@ -1612,3 +1612,23 @@
 2022-04-19 17:12:00,138 - INFO - app.py - welcome - 54 - Login Page Loaded
 2022-04-19 17:12:00,140 - INFO - app.py - welcome - 74 - Main Page Open Start
 2022-04-19 17:12:00,149 - INFO - app.py - main_page - 125 - Main Page Loaded
+2022-04-24 19:44:08,238 - INFO - app.py - welcome - 57 - Login Page Loaded
+2022-04-24 19:44:08,239 - INFO - app.py - welcome - 95 - test1111111
+2022-04-24 19:46:52,090 - INFO - app.py - welcome - 57 - Login Page Loaded
+2022-04-24 19:46:52,097 - INFO - app.py - welcome - 95 - test1111111
+2022-04-24 19:46:56,154 - INFO - app.py - welcome - 57 - Login Page Loaded
+2022-04-24 19:46:56,163 - INFO - app.py - welcome - 77 - Main Page Open Start
+2022-04-24 19:46:56,175 - INFO - app.py - main_page - 128 - Main Page Loaded
+2022-04-24 19:47:01,722 - INFO - app.py - main_page - 128 - Main Page Loaded
+2022-04-24 19:48:18,993 - INFO - app.py - main_page - 128 - Main Page Loaded
+2022-04-24 19:48:27,805 - INFO - app.py - main_page - 128 - Main Page Loaded
+2022-04-24 19:51:22,402 - INFO - app.py - welcome - 57 - Login Page Loaded
+2022-04-24 19:51:22,404 - INFO - app.py - welcome - 95 - test1111111
+2022-04-24 19:52:05,345 - INFO - app.py - main_page - 128 - Main Page Loaded
+2022-04-24 19:52:13,054 - INFO - app.py - main_page - 128 - Main Page Loaded
+2022-04-24 19:52:26,100 - INFO - app.py - main_page - 128 - Main Page Loaded
+2022-04-24 19:52:35,215 - INFO - app.py - main_page - 128 - Main Page Loaded
+2022-04-24 19:52:50,067 - INFO - app.py - main_page - 128 - Main Page Loaded
+2022-04-24 19:54:53,078 - INFO - app.py - main_page - 128 - Main Page Loaded
+2022-04-24 19:54:55,746 - INFO - app.py - main_page - 128 - Main Page Loaded
+2022-04-24 19:55:00,681 - INFO - app.py - main_page - 128 - Main Page Loaded

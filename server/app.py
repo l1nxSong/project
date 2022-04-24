@@ -7,6 +7,7 @@ import pymongo
 import hashlib
 import logging
 import time
+from test import Test
 
 app = Flask(__name__)
 app.config.from_object(settings)
@@ -36,6 +37,8 @@ def check_list(inputList):
         # do test things
         if i == 'R_XSS':
             print('R_XSS chosen')
+            url = "http://127.0.0.1:5001/main_page?input=123"
+            r_test = Test(url, 'xss')
         elif i == 'S_XSS':
             print('S_XSS chosen')
         elif i == 'SSTI':
@@ -127,6 +130,9 @@ def main_page():
         input = request.form.get('input')
         return 'Your input is: ' + str(input)
     # 一个思路：XSS主要由于GET请求的参数内容直接显示在URL中，因此form传参需要使用GET类型来确保可以直接使用脚本进行攻击测试
+    # elif request.method == 'GET':
+    #     input = request.form.get('input')
+    #     return 'Your input is: ' + str(input)
     return render_template('main.html', user=currentUser)
 
 
